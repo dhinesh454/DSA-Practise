@@ -1,0 +1,36 @@
+
+function String(str1,str2){
+  
+let flag=true;
+let i = 0;
+let j=0;
+
+
+while(i<str2.length){
+  let val = str2.charCodeAt(i);
+  console.log(val)
+  if(val>=65&&val<=90){
+     if(str1[j]!==str2[i]) {
+       console.log('came')
+      return false
+       
+     }
+     i++;
+     j++;
+  }
+  else{
+    console.log(j,str2[i],typeof(str2[i]))
+    j=(j+ +str2[i]);
+        console.log(j,typeof(j))
+    
+    i++;
+  }
+     
+  
+}
+
+return true;
+}
+
+  const str1 = 'SHARPENER';
+const str2 = 'S3P3R';
