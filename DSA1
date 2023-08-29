@@ -32,5 +32,13 @@ while(i<str2.length){
 return true;
 }
 
-  const str1 = 'SHARPENER';
+ 
+const str1 = 'SHARPENER';
 const str2 = 'S3P3R';
+//   const str1 = 'DFS';
+// const str2 = 'D1D';
+
+
+let ans = String(str1,str2);
+
+console.log(ans)
