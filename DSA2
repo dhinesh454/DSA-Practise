@@ -1,0 +1,35 @@
+Two strings are twin strings if 'a' of first string is equal to 'z' of second string, 'b' of first string is equal to 'y' of second string.
+
+you have given only one string out of two you have to find
+
+its twin
+
+Example 1:
+
+Input:
+
+S = varun
+
+Output: ezifm
+
+Explanation: Twin string of "varun" will be "ezifm" since v->e ,a->z, r->i, u->f and n->m.
+
+
+solution:-
+
+const inputString = "varun";
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+    let twinString = "";
+
+    for (let i = 0; i < inputString.length; i++) {
+        if (inputString[i] >= 'a' && inputString[i] <= 'z') {
+            const index = inputString[i].charCodeAt(0) - 'a'.charCodeAt(0);
+            twinString += alphabet[25 - index];
+        } else if (inputString[i] >= 'A' && inputString[i] <= 'Z') {
+            const index = inputString[i].charCodeAt(0) - 'A'.charCodeAt(0);
+            twinString += alphabet[25 - index].toUpperCase();
+        } else {
+            twinString += inputString[i];
+        }
+    }
+console.log(twinString)
