@@ -1,0 +1,128 @@
+
+A child in your house is playing with the board of switches . all the switches are of bulbs in the house .
+
+he is keep pressing the switches in the excitement . you have given an array which determine which switched is pressed . if a switch is pressed twice then it will turn off .
+
+if the array contain 'END' then all the switches that are before will turn off . you have to find how many switches are on ?
+
+
+
+Example 1:
+
+Input :
+
+Arr[] = {"1", "2", "1", "END", "2"}
+
+Output : 1
+
+Explanation: In the above test case, firstly switch 1st is on then 2nd is on then 1st is off then all are off then again 2nd is on.
+
+
+
+Example 2:
+
+Input :
+
+Arr[] = {"1", "2", "END"}
+
+Output : 0
+
+
+
+Example 2:
+
+Input :
+
+Arr[] = {"1", "2"}
+
+Output : 2
+
+
+
+Hint use the help of Set concept
+
+solution:-
+
+const map = new Map();
+let s=0;
+
+for(let i in arr){
+
+if(map.has(arr[i])) map.set(arr[i],map.get(arr[i])+1);
+
+else map.set(arr[i],1)
+
+
+
+if(arr[i]=='END'){
+   console.log(s)
+
+  let k=0;
+while (k<=i){
+  map.delete(arr[k]);
+  k++;
+
+}
+s=0;
+}  
+
+else if(map.get(arr[i])%2==1) s+=1;
+else  s-=1;
+
+
+
+}
+
+
+
+
+aliter:- using sets 
+function countSwitchesOn(arr) {
+    const switchesOn = new Set();
+    let count = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === "END") {
+            switchesOn.clear(); // Turn off all switches
+        } else {
+            if (switchesOn.has(arr[i])) {
+                switchesOn.delete(arr[i]); // Switch pressed twice, turn it off
+            } else {
+                switchesOn.add(arr[i]); // Switch pressed once, turn it on
+            }
+        }
+        count += switchesOn.size;
+    }
+
+    return count;
+}
+
+// Example usage:
+const arr1 = ["1", "2", "1", "END", "2"];
+console.log(countSwitchesOn(arr1)); // Output: 1
+
+const arr2 = ["1", "2", "END"];
+console.log(countSwitchesOn(arr2)); // Output: 0
+
+const arr3 = ["1", "2"];
+console.log(countSwitchesOn(arr3)); // Output: 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  console.log(s)
