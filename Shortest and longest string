@@ -1,0 +1,61 @@
+This program takes a string of text as input and finds the length of the shortest and longest word in the string. It then calculates their sum and return .
+
+
+
+Input: The quick brown fox jumps over the lazy dog
+
+Output: 8
+
+Explanation: Longest words are "quick, brown, jumps" and the smallest is "dog, the".
+
+
+
+Input: The cat in the hat
+
+Output: 5
+
+Explanation: Longest words are "the,cat, hat" and the smallest is "in".
+
+
+solution:-
+(I added the string also get as output note:- ucan use single loop while check previous is same i didnt try just if u want try )
+const str='The quick brown fox jumps over the lazy dog';
+
+let short=Infinity,large=0;
+let Lwords=[];
+let Swords=[];
+
+let s=str.split(' ');
+  console.log(s)
+
+
+for(let i of s){
+  let length = i.length;
+  console.log(i);
+  if(length>=large){
+    large=length
+    }
+  if(length<=short){
+  short=length;
+  }
+  
+}
+
+s.forEach((i)=>{
+  if(i.length==large){
+    Lwords.push(i)
+  }
+  
+  if(i.length==short){
+    Swords.push(i)
+  }
+});
+
+
+
+console.log(`Sums is ${large+short}`)
+
+///if u want remove array remove ouput toSrting method added 
+console.log(Lwords.toString());
+
+console.log(Swords.toString())
