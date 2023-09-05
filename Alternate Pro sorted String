@@ -1,1 +1,40 @@
-A
+let c='';
+let s='';
+let output='';
+
+
+
+
+let sorted=S.split('').sort();
+
+
+for(let i of sorted){
+  if(i>='a'&&i<='z') s+=i;
+  
+  else c+=i;
+}
+
+let i=0;
+while(i<c.length||i<s.length){
+  
+    if(i>=s.length){
+      let capitalslice=c.slice(i);
+      output+=capitalslice;
+      break;
+    }
+    
+    else if(i>=c.length){
+      let smallslice= s.slice(i);
+      output+=smallslice;
+      break;
+    }
+     
+    output+=c[i];
+    output+=s[i];
+    
+  
+  i++;
+  
+}
+
+return output;
