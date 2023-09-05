@@ -1,0 +1,172 @@
+Task details
+
+students are going to give the exams . some of them forgot to bring the pen for writing , but some students have extra pens .
+
+You have given an array of integers where negative integer represents the extra pens the student has .
+
+positive integers shows the need of pens that student has .
+
+assume they are seating horizontally on different benches , the work for giving the pen to adjacent bench is 1 unit .
+
+find minimum number of work required to fulfil the needs of all students
+
+
+
+Note : It is guaranteed that sum of all the elements of the array will be 0.
+
+
+
+Example 1:
+
+Input:
+
+N = 5,
+
+Arr[] = {5, -4, 1, -3, 1}
+
+Output: 9
+
+Explanation:  1th student can give 4 pens to 0th student,
+
+total work needed 4*(1-0) = 4, new arr[] = 1,0,1,-3,1 now 3rd student can give pens to 0th, 2th and 4th.
+
+so total work needed = 1*(3-0)+1*(3-2)+1*(4-3) = 5 So total work will be 4+5 = 9
+
+
+
+Example 2: 
+
+Input:
+
+N = 6,
+
+Arr[]={-1000, -1000, -1000, 1000, 1000, 1000}
+
+Output: 9000
+
+Explanation:  0th student give 1000 pens to 3rd student, total work needed 1000*(3-0) = 3000.
+
+1st student give 1000 pens to 4th student, total work needed 3000 + 1000*(3-0) = 6000.
+
+2nd student give 1000 pens to 5th student, total work needed 6000 + 1000*(3-0) = 9000.
+
+So total work will be 9000 unit.
+
+
+
+Constraints:
+
+1 ≤ N ≤ 10^4
+
+-10^6 ≤ Arr[i] ≤ 10^6
+
+
+
+solution 1 :-
+function minWorkToFulfillPens(N, Arr) {
+  let work = 0;
+  const pensNeeded = {};
+  const pensAvailable = {};
+
+
+  for (let i = 0; i < N; i++) {
+    if (Arr[i] < 0) {
+      pensAvailable[i] = Math.abs(Arr[i]);
+    } else {
+      pensNeeded[i] = Math.abs(Arr[i]);
+    }
+  }
+
+ 
+    for (const kn in pensNeeded) {
+      for (const ka in pensAvailable) {
+        const vn = pensNeeded[kn];
+        const va = pensAvailable[ka];
+        
+        if (vn >= va) {
+          work += va * Math.abs(ka - kn);
+          pensNeeded[kn] -= va;
+          pensAvailable[ka] = 0;
+        } else {
+          work += vn * Math.abs(ka - kn);
+          pensNeeded[kn] = 0;
+          pensAvailable[ka] -= vn;
+        }
+      }
+    }
+ 
+
+  return work;
+}
+
+// Example 1
+const N1 = 8;
+const Arr1 = [2,6,-4,3,1,-3,-8,3];
+const output1 = minWorkToFulfillPens(N1, Arr1);
+console.log(output1); // Output: 9
+
+// Example 2
+const N2 = 4;
+const Arr2 = [-1000, -1000,1000, 1000];
+const output2 = minWorkToFulfillPens(N2, Arr2);
+console.log(output2); // Output: 9000
+-------------------------------------------------------------------------------------------------
+aliter solution 2:-(some chase do neet that check and while lop as well)
+function minWorkToFulfillPens(N, Arr) {
+  let work = 0;
+  const pensNeeded = {};
+  const pensAvailable = {};
+
+  function emptyDictCheck(d) {
+    let flag = true;
+    for (const v of Object.values(d)) {
+      if (v !== 0) {
+        flag = false;
+        break;
+      }
+    }
+    return flag;
+  }
+
+  for (let i = 0; i < N; i++) {
+    if (Arr[i] < 0) {
+      pensAvailable[i] = Math.abs(Arr[i]);
+    } else {
+      pensNeeded[i] = Math.abs(Arr[i]);
+    }
+  }
+
+  while (!emptyDictCheck(pensNeeded) && !emptyDictCheck(pensAvailable)) {
+    for (const kn in pensNeeded) {
+      for (const ka in pensAvailable) {
+        const vn = pensNeeded[kn];
+        const va = pensAvailable[ka];
+        
+        if (vn >= va) {
+          work += va * Math.abs(ka - kn);
+          pensNeeded[kn] -= va;
+          pensAvailable[ka] = 0;
+        } else {
+          work += vn * Math.abs(ka - kn);
+          pensNeeded[kn] = 0;
+          pensAvailable[ka] -= vn;
+        }
+      }
+    }
+  }
+
+  return work;
+}
+
+// Example 1
+const N1 = 5;
+const Arr1 = [5, -4, 1, -3, 1];
+const output1 = minWorkToFulfillPens(N1, Arr1);
+console.log(output1); // Output: 9
+
+// Example 2
+const N2 = 4;
+const Arr2 = [-1000, -1000,1000, 1000];
+const output2 = minWorkToFulfillPens(N2, Arr2);
+console.log(output2); // Output: 9000
+
